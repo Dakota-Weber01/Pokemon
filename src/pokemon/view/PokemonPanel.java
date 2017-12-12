@@ -1,6 +1,6 @@
 package pokemon.view;
-
-public class PokemonPanel
+import javax.swing.JFrame;
+public class PokemonPanel extends JFrame 
 {
 
 }
