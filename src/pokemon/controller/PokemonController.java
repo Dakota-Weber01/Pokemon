@@ -1,6 +1,8 @@
 package pokemon.controller;
 
-import pokemon.model.Pokemon;
+
+import pokemon.model.*;
+
 import java.util.List;
 import java.util.ArrayList;
 public class PokemonController
@@ -18,10 +20,20 @@ public boolean isValidInteger(String input)
 {
 	return false;
 }
+
 public boolean isValidDouble(String input)
 {
 return false;
 }
+public String [] convertPokedex()
+{
+	String [] names = new String [pokedex.size()];
+	for (int index =0; index < pokedex.size(); index++)
+	{
+		names[index] = pokedex.get(index).getName();
+	}
+	return names;
+	}
 
 }
 

@@ -1,6 +1,9 @@
 package pokemon.view;
 import javax.swing.*;
-
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import pokemon.controller.PokemonController;
 public class PokemonPanel extends JPanel 
 {
@@ -35,7 +38,38 @@ public class PokemonPanel extends JPanel
 	private JPanel secondType;
 	private JPanel thirdType;
 	private JPanel fourthType;
+	public PokemonPanel(PokemonController appController)
+	{
+		super();
+		this.appController = appController;
+		
+		appLayout = new SpringLayout();
+		
+		evolvableBox = JCheckBox();
+		
+		iconLabel = new JLabel("", new ImageIcon(getClass().getResource("")), JLabel.CENTER);
+		
+		
+	}
+	private void setupComboBox()
+	{
+		DefaultComboBoxModel pokemonModel = DefaultComboBoxModel(appController.convertPokedex());
+		pokedexDropdown.setModel(pokemonModel);
+	}
+	private void setupTypePanels()
+	{
+		firstType.setSize(50, 50);
+		secondType.setSize(50,50);
+		thirdType.setSize(50, 50);
+		fourthType.setSize(50, 50);
+	}
 	
+	private void updateTypePanels()
+	{
+		String[] types = appController.getPokeDex().get(pokedexDropdown.getSelectedIndex()).getPokemonTypes();
+		
+		//Change this to match your 3 minimum types in your pokedex
+	}
 	
 	private void updatePokedexInfo(int index)
 	{
@@ -51,4 +85,20 @@ public class PokemonPanel extends JPanel
 	{
 		
 	}
+	
+	private void setupListeners()
+	{
+		pokedexDropdown.addActionListener(new ActionListener()
+				{
+				public void actionPerformed(ActionEvent selection)
+				{
+					int selectedPokemIndex = pokedexDropdown.getSelectedIndex();
+					updatePokedexInfo(selectedPokemonIndex);
+					updateImage();
+					updateTypePanels();
+					repaint();
+				}
+				});
+	}
+
 }
