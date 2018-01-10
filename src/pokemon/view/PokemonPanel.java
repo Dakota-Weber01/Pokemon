@@ -100,5 +100,5 @@ public class PokemonPanel extends JPanel
 				}
 				});
 	}
-
+//
 }
