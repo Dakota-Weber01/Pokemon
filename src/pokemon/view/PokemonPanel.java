@@ -7,7 +7,9 @@ import java.awt.event.ActionEvent;
 import pokemon.controller.PokemonController;
 public class PokemonPanel extends JPanel 
 {
-	public PokemonPanel() {
+	public PokemonPanel() 
+	{
+		
 	}
 	private PokemonController appController;
 	private SpringLayout appLayout;
@@ -38,6 +40,7 @@ public class PokemonPanel extends JPanel
 	private JPanel secondType;
 	private JPanel thirdType;
 	private JPanel fourthType;
+	
 	public PokemonPanel(PokemonController appController)
 	{
 		super();
@@ -45,7 +48,33 @@ public class PokemonPanel extends JPanel
 		
 		appLayout = new SpringLayout();
 		
-		evolvableBox = JCheckBox();
+		evolvableBox = new JCheckBox();
+		healthLabel = new JLabel();
+		attackLabel = new JLabel();
+		nameLabel = new JLabel();
+		numberLabel = new JLabel();
+		evolvableLabel = new JLabel();
+		modifierLabel = new JLabel();
+		iconLabel = new JLabel();
+		
+		nameField = new JTextField();
+		numberField = new JTextField();
+		attackField = new JTextField();
+		healthField = new JTextField();
+		modifierField = new JTextField();
+		
+		descriptionArea = new JTextArea();
+		typeArea = new JTextArea();
+		
+		saveButton = new JButton();
+		clearButton = new JButton();
+		
+		pokedexDropdown =new JComboBox();
+		
+		firstType = new JPanel();
+		secondType = new JPanel();
+		thirdType = new JPanel();
+		fourthType = new JPanel();
 		
 		iconLabel = new JLabel("", new ImageIcon(getClass().getResource("")), JLabel.CENTER);
 		
@@ -100,5 +129,24 @@ public class PokemonPanel extends JPanel
 				}
 				});
 	}
+	
+	saveButton.addActionListener(new ActionListener()
+			{
+		public void actionPerformed(ActionEvent click)
+		{
+			if(appController.isValidInteger(attackField.getText()) && appController.isValidInteger(healthField.getText()) && appController.isValidDouble(modifierField.getText()))
+					{
+					int selected = pokedexDropdown.getSelectedIndex();
+					int health = Integer.parseInt(healthField.getText());
+					int attack = Integer.parseInt(attackField.getText());
+					double modifier = Double.parseDouble(modifierField.getText());
+					String name = nameField.getText();
+					boolean evolvable = evolvableBox.isSelected();
+					
+					appController.updateSelected(selected, health, attack, evolvable, modifier, name);
+					}
+		}
+	
+			});
 //
 }
